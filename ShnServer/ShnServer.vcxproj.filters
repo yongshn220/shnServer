@@ -4,10 +4,57 @@
     <Filter Include="Main">
       <UniqueIdentifier>{04d63ecd-11cc-4874-92a7-a4b21b31655f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ServerCore">
+      <UniqueIdentifier>{964aec4b-5c9c-4829-8f7d-5f968c231faf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerCore\Network">
+      <UniqueIdentifier>{fa2cd94d-e58e-4a4d-b831-38e34adf5830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ServerCore\Main">
+      <UniqueIdentifier>{96bfce69-7431-4fbb-af8f-bd4ee63e8e89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="IocpCore.cpp">
+      <Filter>ServerCore\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketUtil.cpp">
+      <Filter>ServerCore\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSession.cpp">
+      <Filter>ServerCore\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="IocpEvent.cpp">
+      <Filter>ServerCore\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientSessionManager.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IocpCore.h">
+      <Filter>ServerCore\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketUtil.h">
+      <Filter>ServerCore\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSession.h">
+      <Filter>ServerCore\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="IocpEvent.h">
+      <Filter>ServerCore\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSessionManager.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>ServerCore\Main</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

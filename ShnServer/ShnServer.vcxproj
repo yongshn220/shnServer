@@ -182,7 +182,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClientSession.cpp" />
+    <ClCompile Include="ClientSessionManager.cpp" />
     <ClCompile Include="GameServer.cpp" />
+    <ClCompile Include="IocpCore.cpp" />
+    <ClCompile Include="IocpEvent.cpp" />
+    <ClCompile Include="SocketUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ClientSession.h" />
+    <ClInclude Include="ClientSessionManager.h" />
+    <ClInclude Include="IocpCore.h" />
+    <ClInclude Include="IocpEvent.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SocketUtil.h" />
+    <ClInclude Include="Types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
