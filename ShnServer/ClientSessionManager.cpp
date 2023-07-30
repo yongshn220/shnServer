@@ -8,12 +8,12 @@ ClientSessionManager::~ClientSessionManager()
 {
 }
 
-bool ClientSessionManager::CreateSession()
+ClientSession* ClientSessionManager::CreateSession()
 {
 	ClientSession* session = new ClientSession();
 	sessions.push_back(session);
 
-	return true;
+	return session;
 }
 
 bool ClientSessionManager::RemoveSession(ClientSession* session)

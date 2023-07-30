@@ -7,6 +7,6 @@ class SocketUtil
 public:
 	static LPFN_ACCEPTEX AcceptEx;
 
-	void Start()
+	void Start();
 };
 

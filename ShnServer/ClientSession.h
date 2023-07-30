@@ -1,31 +1,42 @@
 #pragma once
 #include "pch.h"
 #include "IocpEvent.h"
+#include "RecvBuffer.h"
 
-
-class ClientSession : 
+class ClientSession
 {
+	enum
+	{
+		BUFFER_SIZE = 0x10000, //64kb
+	};
+
 public:
 	ClientSession();
 	~ClientSession();
 
-	void Dispatch(IocpEvent* iocpEvent);
+	int32 OnRecv(char* buffer, int32 len);
+	
+	void OnSend();
+
+	void Connect();
+
+	void Send(char* buffer, int32 len);
+
+	void Dispatch(IocpEvent* iocpEvent, int32 numOfBytes);
 
 	void RegisterRecv();
 
-	void RegisterSend();
+	void RegisterSend(char* buffer, int32 len);
 
 	void ProcessAccept();
 
-	void ProcessRecv();
+	void ProcessRecv(int32 numOfBytes);
 
-	void ProcessSend();
+	void ProcessSend(int32 numOfBytes);
 
 public:
 	SOCKET socket;
 
-	int32 buffSize = 1000;
-	char recvBuffer[1000];
-
+	RecvBuffer recvBuffer;
 };
 

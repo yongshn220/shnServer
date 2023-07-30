@@ -13,6 +13,9 @@
     <Filter Include="ServerCore\Main">
       <UniqueIdentifier>{96bfce69-7431-4fbb-af8f-bd4ee63e8e89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{1199c2bf-e6dd-4e88-9a95-cb75045451d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameServer.cpp">
@@ -32,6 +35,15 @@
     </ClCompile>
     <ClCompile Include="ClientSessionManager.cpp">
       <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RecvBuffer.cpp">
+      <Filter>ServerCore\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientPacketHandler.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SendBuffer.cpp">
+      <Filter>ServerCore\Network</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>ServerCore\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="RecvBuffer.h">
+      <Filter>ServerCore\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientPacketHandler.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SendBuffer.h">
+      <Filter>ServerCore\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

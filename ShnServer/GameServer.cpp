@@ -1,82 +1,11 @@
 
-#include <iostream>
 #include "pch.h"
 #include "IocpCore.h"
 #include "ClientSessionManager.h"
+#include "ClientPacketHandler.h"
 
 
-const __int32 BUFSIZE = 1000;
-
-struct Session
-{
-	SOCKET socket = INVALID_SOCKET;
-	char recvBuffer[BUFSIZE] = "";
-	__int32 recvBytes = 0;
-};
-
-struct OverlappedEx
-{
-	WSAOVERLAPPED overlapped = {};
-	__int32 type = 0;
-};
-
-void WorkerThreadMain(HANDLE iocpHandle)
-{
-	cout << "Working.." << endl;
-	while (true)
-	{
-		// DWORD : uint32
-		DWORD bytesTransferred = 0;
-		Session* session = nullptr;
-		OverlappedEx* overlappedEx = nullptr;
-
-		bool ret = ::GetQueuedCompletionStatus(iocpHandle, &bytesTransferred,
-			(ULONG_PTR*)&session, (LPOVERLAPPED*)&overlappedEx, INFINITE);
-
-		if (ret == FALSE || bytesTransferred == 0)
-		{
-			cout << "IOCP fail" << endl;
-			continue;
-		}
-
-		cout << "Parse" << endl;
-
-		if (overlappedEx->type == IO_TYPE::ACCEPT)
-		{
-			{
-				OverlappedEx* overlappedEx = new OverlappedEx();
-				overlappedEx->overlapped = {};
-				overlappedEx->type = IO_TYPE::WRITE;
-
-				WSABUF wsaBuf;
-				wsaBuf.buf = session->recvBuffer;
-				wsaBuf.len = BUFSIZE;
-
-				DWORD sendLen = 0;
-				DWORD flags = 0;
-
-				::WSASend(session->socket, &wsaBuf, 1, &sendLen, flags, &overlappedEx->overlapped, NULL);
-			}
-			{
-				cout << "Recv IOCP: " << bytesTransferred << endl;
-				WSABUF wsaBuf;
-				wsaBuf.buf = session->recvBuffer;
-				wsaBuf.len = BUFSIZE;
-
-				DWORD recvLen = 0;
-				DWORD flags = 0;
-				::WSARecv(session->socket, &wsaBuf, 1, &recvLen, &flags, &overlappedEx->overlapped, NULL);
-			}
-		}
-
-		if (overlappedEx->type == IO_TYPE::WRITE)
-		{
-			cout << "Send Success." << endl;
- 		}
-	}
-}
-
-SOCKET InitListenSocket(SOCKET& listenSocket);
+void InitListenSocket(SOCKET& listenSocket);
 
 int main()
 {
@@ -93,7 +22,7 @@ int main()
 	vector<thread> threads;
 	for (__int32 i = 0; i < 5; i++) 
 	{
-		threads.push_back(thread([=]() {iocpCore->Dispatch(); } ));
+		threads.push_back(thread([=]() { iocpCore->Dispatch(); } ));
 	}
 
 	while (true)
@@ -108,7 +37,7 @@ int main()
 		ClientSession* session = sessionManager->CreateSession();
 		session->socket = clientSocket;
 
-		cout << "Client Connected" << endl;
+		cout << "Client Accepter" << endl;
 
 		iocpCore->Register(&clientSocket);
 		session->Connect();
@@ -125,7 +54,7 @@ int main()
 
 
 
-SOCKET InitListenSocket(SOCKET &listenSocket)
+void InitListenSocket(SOCKET &listenSocket)
 {
 	listenSocket = ::socket(AF_INET, SOCK_STREAM, 0);
 
