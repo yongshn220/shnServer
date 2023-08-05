@@ -9,6 +9,7 @@ void InitListenSocket(SOCKET& listenSocket);
 
 int main()
 {
+
 	WSAData wsaData;
 	if (::WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 		return 0;
@@ -27,6 +28,7 @@ int main()
 
 	while (true)
 	{
+		cout << "Waiting for new client" << endl;
 		SOCKADDR_IN clientAddr;
 		__int32 addrLen = sizeof(clientAddr);
 

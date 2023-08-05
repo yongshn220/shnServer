@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "IocpEvent.h"
 #include "RecvBuffer.h"
+#include "PlayerManager.h"
 
 class ClientSession
 {

@@ -19,11 +19,6 @@ void ClientSession::OnSend()
 void ClientSession::Connect()
 {
 	ProcessAccept();
-
-	char* buffer = ClientPacketHandler::Make_S_USER();
-	PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
-
-	Send(buffer, header->size);
 }
 
 void ClientSession::Send(char* buffer, int32 len)
@@ -81,6 +76,10 @@ void ClientSession::RegisterSend(char* buffer, int32 len)
 void ClientSession::ProcessAccept()
 {
 	RegisterRecv();
+
+	Player* player = GPlayerManager.CreatePlayer();
+	player->setSession(this);
+	player->sendPacket();
 }
 
 void ClientSession::ProcessRecv(int32 numOfBytes)
